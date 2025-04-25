@@ -1,6 +1,6 @@
 # 🧠 Duke Plastic Policy Chatbot
 
-Welcome to the **Duke Plastic Pollution Working Group**'s interactive chatbot project! This tool enables users to ask questions about global plastic pollution regulations using a powerful combination of document embeddings and large language models (LLMs).
+Welcome to the **Duke Plastic Pollution Working Group**'s interactive chatbot project! This tool enables users to ask questions about [global plastic pollution regulations](https://nicholasinstitute.duke.edu/plastics-technology-inventory) collected by researchers at the Nicholas Institute at Duke University. This tool uses a combination of document embeddings and LLMs to allow users to interact with the documents. 
 
 🌐 **Live App**: [Try it on Streamlit Cloud →](https://duke-plastic-pollution-chatbot.streamlit.app/)
 
