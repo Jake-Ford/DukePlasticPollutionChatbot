@@ -26,7 +26,7 @@ vectors, metadata = load_embeddings()
 
 
 # --- Load embedding model ---
-embed_model = SentenceTransformer("intfloat/e5-base-v2")
+embed_model = SentenceTransformer("intfloat/e5-base-v2", device="cpu")
 
 # --- LLM API setup ---
 def get_mistral_response(prompt):
