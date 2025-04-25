@@ -3,6 +3,10 @@ import os
 import pickle
 import numpy as np
 from sentence_transformers import SentenceTransformer
+from sentence_transformers.models import Transformer, Pooling
+
+from transformers import AutoModel, AutoTokenizer
+
 from sklearn.metrics.pairwise import cosine_similarity
 import requests
 from dotenv import load_dotenv
@@ -26,7 +30,18 @@ vectors, metadata = load_embeddings()
 
 
 # --- Load embedding model ---
-embed_model = SentenceTransformer("intfloat/e5-base-v2", device="cpu")
+@st.cache_resource(show_spinner="Loading embedding model...")
+def get_embed_model():
+    model_name = "intfloat/e5-base-v2"
+
+    # Load tokenizer and model on CPU to avoid meta tensor issues
+    tokenizer = AutoTokenizer.from_pretrained(model_name)
+    transformer = Transformer(model_name, max_seq_length=512)
+    pooling = Pooling(word_embedding_dimension=transformer.get_word_embedding_dimension())
+    
+    return SentenceTransformer(modules=[transformer, pooling])
+
+embed_model = get_embed_model()
 
 # --- LLM API setup ---
 def get_mistral_response(prompt):
