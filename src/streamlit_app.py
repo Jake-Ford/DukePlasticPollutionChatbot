@@ -8,16 +8,22 @@ import requests
 from dotenv import load_dotenv
 from google import generativeai as genai
 #import google.generativeai as genai
-
+import requests
 
 # --- Load environment variables ---
 load_dotenv()
 MISTRAL_API_KEY = os.getenv("MISTRAL_API_KEY")
 GEMMA_API_KEY = os.getenv("GEMMA_API_KEY")
 
-# --- Load vector store ---
-with open("../plastic_doc_embeddings.pkl", "rb") as f:
-    vectors, metadata = pickle.load(f)
+@st.cache_data(show_spinner="Loading document embeddings...")
+def load_embeddings():
+    url = "https://drive.google.com/uc?export=download&id=1o988OjkTRNPY_B-zTqRQyT86dzklcdCP"
+    r = requests.get(url, stream=True)
+    r.raise_for_status()
+    return pickle.loads(b"".join(r.iter_content(chunk_size=8192)))
+
+vectors, metadata = load_embeddings()
+
 
 # --- Load embedding model ---
 embed_model = SentenceTransformer("intfloat/e5-base-v2")
