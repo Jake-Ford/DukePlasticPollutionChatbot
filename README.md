@@ -33,3 +33,22 @@ This chatbot is designed to:
 ```bash
 git clone https://github.com/your-username/dukeplasticpollutionchatbot.git
 cd dukeplasticpollutionchatbot
+```
+
+### 2. Create and Set up Env
+```bash 
+pip install -r requirements.txt
+```
+
+Grab the free versions of the Mistral and Gemma API Keys and add to your .env file: 
+
+```env
+MISTRAL_API_KEY=your_mistral_api_key
+GEMMA_API_KEY=your_gemma_api_key
+```
+
+### 3. Local Setup/Running
+
+```bash 
+streamlit run streamlit_app.py
+```
